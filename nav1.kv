@@ -1,0 +1,40 @@
+            GridLayout:
+                rows: 3
+                Label:
+                    id: label1
+                    halign: 'center'
+                    markup: True
+                    text: "[u][size=48][b]EvilRokuRemote[/b][/size][/u]"
+                    #pos_hint: {'top': 1}
+                    color: 0,0,0,1
+                    size_hint_y: 0.2
+                GridLayout:
+                    cols: 2
+                    Label:
+                        id: label_discover
+                        halign: 'center'
+                        markup: True
+                        text: "Check for Rokus!"
+                        color: 0,0,0,1
+                    Button:
+                        halign: 'center'
+                        text: "Scan for Rokus"
+                        on_release: app.get_rokus()
+                        #pos_hint: {'y': .85}
+                        color: 0,0,0,1
+                GridLayout:
+                    rows: 3
+                    cols: 2
+                    Button:
+                        halign: 'center'
+                        text: "Find Remotes Everywhere lol"
+                        on_release: app.run_command()
+                        #pos_hint: {'y': .80}
+                        color: 0,0,0,1
+
+
+
+
+
+
+

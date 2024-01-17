@@ -1,0 +1,202 @@
+<GridButton@Button>:
+    size: 150, 150
+    markup: True
+
+<RemoteButton@Button>:
+    size: dp(100), dp(100)
+    size_hint: (None, None)
+    markup: True
+
+FloatLayout:
+    MDBottomNavigation:
+        id: panel
+
+        MDBottomNavigationItem:
+            name: "Screen1"
+            text: "Scan Network"
+            icon: "radar"
+            StackLayout:
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: 0.1
+                    Label:
+                        id: label_network
+                        halign: 'left'
+                        markup: True
+                        text: "[size=35][b]Connected[/b][/size]"
+                        color: 0, 0, 0, 1
+                    Button:
+                        id: button_networkscan
+                        halight: 'center'
+                        markup: True
+                        text: '[b]Scan For Rokus[b]'
+                        on_release: app.btn_scan()
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: 0.1
+                    MDTextField:
+                        id: input_manualip
+                        halign: 'left'
+                        markup: True
+                        text: "127.0.0.1"
+                        color: 0, 0, 0, 1
+                    Button:
+                        id: button_manualadd
+                        halight: 'center'
+                        markup: True
+                        text: '[b][ + ]'
+                        on_release: app.add_ip()
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    Button:
+                        size_hint_y: 0.1
+                        markup: True
+                        text: "[b]Reload Device List[b]"
+                        on_release: app.load_list()
+
+                    ScrollView:
+                        size_hint_y: 0.9
+                        MDList:
+                            id: list_devices
+
+        MDBottomNavigationItem:
+            name: "screen2"
+            text: "Send Commands"
+            icon: "remote"
+            GridLayout:
+                rows: 3
+                cols: 3
+                GridButton:
+                    text: '[b]Find Remote[b]'
+                    on_release: app.run_command('find_remote')
+                GridButton:
+                    text: '[b]Power On[b]'
+                    on_release: app.run_command('poweron')
+                GridButton:
+                    text: '[b]Power Off[b]'
+                    on_release: app.run_command('poweroff')
+                GridButton:
+                    text: '[b]Swtich AV Input 1[b]'
+                    on_release: app.run_command('input_av1')
+                GridButton:
+                    text: '[b]Switch HDMI 1[b]'
+                    on_release: app.run_command('input_hdmi1')
+                GridButton:
+                    text: '[b]Switch HDMI 2[b]'
+                    on_release: app.run_command('input_hdmi2')
+                GridButton:
+                    text: '[b]Switch HDMI 3[b]'
+                    on_release: app.run_command('input_hdmi3')
+                GridButton:
+                    text: '[b]Switch HDMI 4[b]'
+                    on_release: app.run_command('input_hdmi4')
+                GridButton:
+                    text: '[b]Switch Tuner[b]'
+                    on_release: app.run_command('input_tuner')
+
+        MDBottomNavigationItem:
+            name: "screen3"
+            text: "Multi-Remote"
+            icon: "multicast"
+            FloatLayout:
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'bottom'
+                    RemoteButton:
+                        text: 'Down'
+                        on_release: app.run_command('down')
+
+                GridLayout:
+                    rows: 3
+                    cols: 3
+                    # ... (other buttons)
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    GridLayout:
+                        padding: [5,5,5,5]
+                        size_hint_y: 0.2
+                        rows: 1
+                        Button:
+                            text: '<--'
+                            on_release: app.run_command('back')
+                        Button:
+                            text: 'test'
+                        Button:
+                            text: 'Home'
+                            on_release: app.run_command('home')
+
+                    AnchorLayout:
+                        anchor_y: 'top'
+                        RelativeLayout:
+                            size: dp(300), dp(300)
+                            size_hint: None, None
+
+                            AnchorLayout:
+                                anchor_x: 'center'
+                                anchor_y: 'top'
+                                RemoteButton:
+                                    text: 'Up'
+                                    on_release: app.run_command('up')
+
+                            AnchorLayout:
+                                anchor_x: 'left'
+                                anchor_y: 'center'
+                                RemoteButton:
+                                    text: 'Left'
+                                    on_release: app.run_command('left')
+
+                            AnchorLayout:
+                                anchor_x: 'center'
+                                anchor_y: 'center'
+                                RemoteButton:
+                                    text: 'OK'
+                                    on_release: app.run_command('select')
+
+                            AnchorLayout:
+                                anchor_x: 'right'
+                                anchor_y: 'center'
+                                RemoteButton:
+                                    text: 'Right'
+                                    on_release: app.run_command('right')
+
+                            AnchorLayout:
+                                anchor_x: 'center'
+                                anchor_y: 'bottom'
+                                RemoteButton:
+                                    text: 'Down'
+                                    on_release: app.run_command('down')
+
+                    GridLayout:
+                        rows: 2
+                        size_hint_y: 0.3
+                        padding: [5, 5, 5, 5]
+                        Button:
+                            text: '10Sec JumpBack'
+                            on_release: app.run_command('replay')
+                        Button:
+                            text: '*'
+                            on_release: app.run_command('info')
+                        Button:
+                            text: 'test'
+                        Button:
+                            text: '<<'
+                            on_release: app.run_command('reverse')
+                        Button:
+                            text: 'Play/Pause'
+                            on_release: app.run_command('play')
+                        Button:
+                            text: '>>'
+                            on_release: app.run_command('forward')
+
+                    ScrollView:
+                        id: list_scrollview
+                        MDList:
+                            id: list_status
+
+        MDBottomNavigationItem:
+            name: "screen4"
+            text: "Havoc Mode"
+            icon: "alert"

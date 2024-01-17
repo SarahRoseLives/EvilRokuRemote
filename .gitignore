@@ -1,0 +1,4 @@
+!/.buildozer/
+!/.venv/
+!/build_apk.sh
+!/pylogcat.sh
